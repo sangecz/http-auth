@@ -57,3 +57,7 @@ footer {
     width: 50%; /* 6 columns */
   }
 }
+
+.navbar-toggle .icon-bar {
+    background-color: white;
+}
