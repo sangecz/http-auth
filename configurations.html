@@ -6,7 +6,13 @@ layout: default
         <h2>Configurations</h2>
         <ul>
             <li><label>realm</label> - Authentication realm.</li>
-            <li><label>file</label> -  File where user details are stored.</li>
+            <li>
+                <label>file</label> -  File where user details are stored.
+                <ul>
+                    <li>Line format is <strong>{user:pass}</strong> or <strong>{user:passHash}</strong> for basic access.</li>
+                    <li>Line format is <strong>{user:realm:passHash}</strong> for digest access.</li>
+                </ul>
+            </li>
             <li><label>algorithm</label> - Algorithm that will be used only for <strong>digest access authentication</strong>.</li>
             <li><label>qop</label> - Quality of protection that is used only for <strong>digest access authentication</strong>.</li>
             <li><label>msg401</label> - Message for failed authentication 401 page.</li>
