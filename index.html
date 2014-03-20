@@ -12,31 +12,31 @@ layout: default
     <div class="col-12 col-sm-12">
         <h2>Basic example</h2>
         <pre class="prettyprint"><code class="language-javascript">// Authentication module.
-            var auth = require('http-auth');
-            var basic = auth.basic({
-            realm: "Simon Area.",
-            file: __dirname + "/../data/users.htpasswd" // gevorg:gpass, Sarah:testpass ...
-            });
+var auth = require('http-auth');
+var basic = auth.basic({
+    realm: "Simon Area.",
+    file: __dirname + "/../data/users.htpasswd" // gevorg:gpass, Sarah:testpass ...
+});
 
-            // Creating new HTTP server.
-            http.createServer(basic, function(req, res) {
-            res.end("Welcome to private area - " + req.user + "!");
-            }).listen(1337);</code></pre>
+// Creating new HTTP server.
+http.createServer(basic, function(req, res) {
+    res.end("Welcome to private area - " + req.user + "!");
+}).listen(1337);</code></pre>
     </div>
     <div class="col-12 col-sm-12">
         <h2>Custom authentication function</h2>
         <pre class="prettyprint"><code class="language-javascript">// Authentication module.
-            var auth = require('http-auth');
-            var basic = auth.basic({
-            realm: "Simon Area."
-            }, function (username, password, callback) { // Custom authentication method.
-            callback(username === "Tina" && password === "Bullock");
-            }
-            );
+var auth = require('http-auth');
+var basic = auth.basic({
+        realm: "Simon Area."
+    }, function (username, password, callback) { // Custom authentication method.
+        callback(username === "Tina" && password === "Bullock");
+    }
+);
 
-            // Creating new HTTP server.
-            http.createServer(basic, function(req, res) {
-            res.end("Welcome to private area - " + req.user + "!");
-            }).listen(1337);</code></pre>
+// Creating new HTTP server.
+http.createServer(basic, function(req, res) {
+    res.end("Welcome to private area - " + req.user + "!");
+}).listen(1337);</code></pre>
     </div>
 </div><!--/row-->
