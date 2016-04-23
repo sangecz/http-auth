@@ -21,6 +21,27 @@ app.get('/', function(req, res){
 });</code></pre>
     </div>
     <div class="col-12 col-sm-12">
+        <h2><a href="http://passportjs.org/">passport</a> integration</h2>
+        <pre class="prettyprint"><code class="language-javascript">// Authentication module.
+var auth = require('http-auth');
+var basic = auth.basic({
+    realm: "Simon Area.",
+    file: __dirname + "/../data/users.htpasswd" // gevorg:gpass, Sarah:testpass ...
+});
+
+// Application setup.
+var app = express();
+
+// Setup strategy.
+var passport = require('passport');
+passport.use(auth.passport(basic));
+
+// Setup route.
+app.get('/', passport.authenticate('http', { session: false }), function(req, res) {
+    res.end("Welcome to private area - " + req.user + "!");
+});</code></pre>
+    </div>
+    <div class="col-12 col-sm-12">
         <h2><a href="https://github.com/nodejitsu/node-http-proxy/">http-proxy</a> integration</h2>
         <pre class="prettyprint"><code class="language-javascript">// Authentication module.
 var auth = require('http-auth');
