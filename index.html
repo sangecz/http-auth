@@ -83,6 +83,22 @@ app.get('/', function(req, res){
   res.send("Hello from express - " + req.user + "!");
 });
 </code></pre>
+        <h3><a target="_blank" href="http://koajs.com/">koa framework</a> integration</h3>
+        <pre><code class="language-javascript">// Authentication module.
+var auth = require('../gensrc/http-auth');
+var basic = auth.basic({
+    realm: "Simon Area.",
+    file: __dirname + "/../data/users.htpasswd" // gevorg:gpass, Sarah:testpass
+});
+
+// Enable auth.
+app.use(auth.koa(basic));
+
+// Final handler.
+app.use(function *(){
+this.body = "Hello from koa - " + this.req.user + "!";
+});
+</code></pre>
         <h3>Protecting specific path</h3>
         <pre><code class="language-javascript">// Authentication module.
 var auth = require('http-auth');
