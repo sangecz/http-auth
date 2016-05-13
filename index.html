@@ -96,7 +96,7 @@ app.use(auth.koa(basic));
 
 // Final handler.
 app.use(function *(){
-this.body = "Hello from koa - " + this.req.user + "!";
+    this.body = "Hello from koa - " + this.req.user + "!";
 });
 </code></pre>
         <h3>Protecting specific path</h3>
