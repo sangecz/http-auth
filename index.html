@@ -80,7 +80,7 @@ app.use(auth.connect(basic));
 
 // Setup route.
 app.get('/', function(req, res){
-  res.send("Hello from express - " + req.user + "!");
+    res.send("Hello from express - " + req.user + "!");
 });
 </code></pre>
         <h3><a target="_blank" href="http://koajs.com/">koa framework</a> integration</h3>
@@ -112,7 +112,7 @@ var app = express();
 
 // Setup route.
 app.get('/admin', auth.connect(basic), function(req, res){
-  res.send("Hello from admin area - " + req.user + "!");
+    res.send("Hello from admin area - " + req.user + "!");
 });
 
 // Setup route.
