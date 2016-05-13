@@ -117,7 +117,7 @@ app.get('/admin', auth.connect(basic), function(req, res){
 
 // Setup route.
 app.get('/', function(req, res){
-  res.send("Not protected area!");
+    res.send("Not protected area!");
 });
 </code></pre>
         <h3><a target="_blank" href="http://passportjs.org/">passport</a> integration</h3>
