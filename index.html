@@ -93,7 +93,6 @@ var basic = auth.basic({
     file: __dirname + "/../data/users.htpasswd"
 });
 
-
 // Final handler.
 app.use(function *(next) {
     yield next;
