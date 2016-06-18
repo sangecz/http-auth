@@ -101,6 +101,28 @@ app.use(function *() {
     this.body = "Hello from koa - " + this.req.user + "!";
 });
 </code></pre>
+        <p>For <a href="https://github.com/koajs/koa/tree/v2.x">koa@next</a> you can use <a href="https://github.com/http-auth/http-auth-koa">http-auth-koa</a></p>
+        <pre><code class="language-javascript">// Authentication module.
+import auth from 'http-auth'
+import koaAuth from 'http-auth-koa'
+const basic = auth.basic({
+    realm: "Simon Area.",
+    file: __dirname + "/../data/users.htpasswd"
+});
+
+// Koa setup.
+import Koa from 'koa'
+const app = new Koa();
+
+// Setup basic handler.
+app.use(async ctx => {
+    await next();
+    ctx.body = `Welcome to koa ${ctx.req.user}!`;
+});
+
+// Setup auth.
+app.use(koaAuth(basic));
+</code></pre>
         <h3>Protecting specific path</h3>
         <pre><code class="language-javascript">// Authentication module.
 var auth = require('http-auth');
