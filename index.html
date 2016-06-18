@@ -93,13 +93,15 @@ var basic = auth.basic({
     file: __dirname + "/../data/users.htpasswd"
 });
 
-// Enable auth.
-app.use(auth.koa(basic));
 
 // Final handler.
-app.use(function *() {
+app.use(function *(next) {
+    yield next;
     this.body = "Hello from koa - " + this.req.user + "!";
 });
+
+// Enable auth.
+app.use(auth.koa(basic));
 </code></pre>
         <p>For <a href="https://github.com/koajs/koa/tree/v2.x">koa@next</a> you can use <a href="https://github.com/http-auth/http-auth-koa">http-auth-koa</a></p>
         <pre><code class="language-javascript">// Authentication module.
@@ -115,7 +117,7 @@ import Koa from 'koa'
 const app = new Koa();
 
 // Setup basic handler.
-app.use(async ctx => {
+app.use(async (ctx, next) => {
     await next();
     ctx.body = `Welcome to koa ${ctx.req.user}!`;
 });
