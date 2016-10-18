@@ -47,8 +47,8 @@ var basic = auth.basic({
 });
 
 // Creating new HTTP server.
-http.createServer(basic, function(req, res) {
-    res.end("Welcome to private area - " + req.user + "!");
+http.createServer(basic, (req, res) => {
+    res.end(`Welcome to private area - ${req.user}!`);
 }).listen(1337);
 </code></pre>
         <h3>Custom authentication</h3>
@@ -56,7 +56,7 @@ http.createServer(basic, function(req, res) {
 var auth = require('http-auth');
 var basic = auth.basic({
         realm: "Simon Area."
-    }, function (username, password, callback) {
+    }, (username, password, callback) => {
         // Custom authentication.
         // Use callback(error) if you want to throw async error.
         callback(username === "Tina" && password === "Bullock");
@@ -64,8 +64,8 @@ var basic = auth.basic({
 );
 
 // Creating new HTTP server.
-http.createServer(basic, function(req, res) {
-    res.end("Welcome to private area - " + req.user + "!");
+http.createServer(basic, (req, res) => {
+    res.end(`Welcome to private area - ${req.user}!`);
 }).listen(1337);
 </code></pre>
         <h3><a target="_blank" href="http://expressjs.com/">express framework</a> integration</h3>
@@ -81,8 +81,8 @@ var app = express();
 app.use(auth.connect(basic));
 
 // Setup route.
-app.get('/', function(req, res) {
-    res.send("Hello from express - " + req.user + "!");
+app.get('/', (req, res) => {
+    res.send(`Hello from express - ${req.user}!`);
 });
 </code></pre>
         <h3><a target="_blank" href="http://koajs.com/">koa framework</a> integration</h3>
@@ -96,7 +96,7 @@ var basic = auth.basic({
 // Final handler.
 app.use(function *(next) {
     yield next;
-    this.body = "Hello from koa - " + this.req.user + "!";
+    this.body = `Hello from koa - ${this.req.user}!`;
 });
 
 // Enable auth.
@@ -171,12 +171,12 @@ var basic = auth.basic({
 var app = express();
 
 // Setup route.
-app.get('/admin', auth.connect(basic), function(req, res) {
-    res.send("Hello from admin area - " + req.user + "!");
+app.get('/admin', auth.connect(basic), (req, res) => {
+    res.send(`Hello from admin area - ${req.user}!`);
 });
 
 // Setup route.
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
     res.send("Not protected area!");
 });
 </code></pre>
@@ -197,8 +197,8 @@ passport.use(auth.passport(basic));
 
 // Setup route.
 app.get('/', passport.authenticate('http', { session: false }),
-    function(req, res) {
-        res.end("Welcome to private area - " + req.user + "!");
+    (req, res) => {
+        res.end(`Welcome to private area - ${req.user}!`);
     }
 );
 </code></pre>
@@ -216,7 +216,7 @@ httpProxy.createServer(basic, {
 }).listen(1337);
 
 // Create your target server.
-http.createServer(function (req, res) {
+http.createServer((req, res) => {
     res.end("Request successfully proxied!");
 }).listen(1338);
 </code></pre>
