@@ -124,11 +124,8 @@ app.use(async (ctx, next) => {
 // Setup auth.
 app.use(koaAuth(basic));
 </code></pre>
-        <h3>For <a href="http://hapijs.com/" target="_blank">Hapi framework</a> you can use <a href="https://github.com/http-auth/http-auth-hapi">http-auth-hapi</a></h3>
-        <pre><code class="language-javascript">// Import hapi integration.
-const authHapi = require('http-auth-hapi');
-
-// Authentication module.
+        <h3><a target="_blank" href="http://hapijs.com/">Hapi framework</a> integration</h3>
+        <pre><code class="language-javascript">// Authentication module.
 const auth = require('http-auth');
 
 // Setup auth.
@@ -142,7 +139,7 @@ const server = new Hapi.Server();
 server.connection({ port: 1337 });
 
 // Register auth plugin.
-server.register(authHapi);
+server.register(auth.hapi());
 
 // Setup strategy.
 server.auth.strategy('http-auth', 'http', basic);
