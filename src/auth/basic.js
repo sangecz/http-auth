@@ -44,12 +44,18 @@ class Basic extends Base {
 
     // Processes line from authentication file.
     processLine (userLine) {
-        let lineSplit = userLine.split(":");
-        let username = lineSplit.shift();
-        let hash = lineSplit.join(":");
+      let lineSplit = userLine.split(":");
+      let username = lineSplit.shift();
+      let hash = lineSplit.shift();
+      const group = lineSplit.shift();
 
-        // Push user.
-        this.options.users.push({username: username, hash: hash});
+      const user = {username: username, hash: hash};
+      if(group) {
+        user.group = group;
+      }
+
+      // Push user.
+      this.options.users.push(user);
     }
 
     // Generates request header.
@@ -90,16 +96,18 @@ class Basic extends Base {
         } else {
             // File based auth.
             let pass = false;
+            let group = 'none';
 
             // Loop users to find the matching one.
             this.options.users.forEach(user => {
                 if (user.username === username && this.validate(user.hash, password)) {
                     pass = true;
+                    group = user.group;
                 }
             });
 
             // Call final callback.
-            callback.apply(this, [{user: username, pass: pass}]);
+            callback.apply(this, [{user: username, pass: pass, group}]);
         }
     }
 }
